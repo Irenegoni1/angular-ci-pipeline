@@ -1,0 +1,29 @@
+name: Deploy Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start Timer
+        run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v3
+
+      - name: Build Java Backend
+        run: mvn -f authorization-server clean install
+
+      - name: Build Angular Frontend
+        run: |
+          cd ag-prueba-front
+          npm install
+          npm run build
+
+      - name: End Timer
+        run: echo "END_TIME=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Calculate Duration
+        run: echo "DEPLOY_TIME=$((END_TIME-START_TIME)) seconds" >> $GITHUB_STEP_SUMMARY

@@ -7,8 +7,8 @@ DB_USER=root
 DB_PASS=1234
 
 ## OAuth2 Google
-GOOGLE_CLIENT_ID=xxxx
-GOOGLE_CLIENT_SECRET=xxxx
+GOOGLE_CLIENT_ID=dummy-client-id
+GOOGLE_CLIENT_SECRET=dummy-client-secret
 REDIRECT_URI=http://localhost:4200/login
 
 ## Spring Authorization Server

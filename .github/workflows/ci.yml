@@ -2,30 +2,43 @@ name: CI Pipeline
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   ci:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      # Backend
-      - name: Backend - Build & Test
+      # -------------------------
+      # BACKEND: Authorization Server
+      # -------------------------
+      - name: Build & Test Authorization Server
         run: |
           cd authorization-server
           mvn clean test
 
-      # Resource server
-      - name: Resource Server - Build & Test
+      # -------------------------
+      # BACKEND: Resource Server
+      # -------------------------
+      - name: Build & Test Resource Server
         run: |
           cd resource-server
           mvn clean test
 
-      # Frontend
-      - name: Frontend - Test
+      # -------------------------
+      # FRONTEND: Angular
+      # -------------------------
+      - name: Install dependencies for Angular
         run: |
           cd ag-prueba-front
           npm install
-          npm test -- --watch=false
+
+      - name: Angular Unit Tests
+        run: |
+          cd ag-prueba-front
+          npm test -- --watch=false --browsers=ChromeHeadless

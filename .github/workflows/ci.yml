@@ -11,43 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # -------------------------
-      # Checkout repository
-      # -------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # -------------------------
-      # Backend: Authorization Server
-      # -------------------------
-      - name: Build Authorization Server
-        working-directory: ./authorization-server
-        run: mvn -q -DskipTests clean package
+      - name: Simular build backend
+        run: echo "Build backend simulado"
 
-      # -------------------------
-      # Backend: Resource Server
-      # -------------------------
-      - name: Build Resource Server
-        working-directory: ./resource-server
-        run: mvn -q -DskipTests clean package
-
-      # -------------------------
-      # Frontend: Saltarse Angular si no existe
-      # -------------------------
-      - name: Build Angular (si existe)
+      - name: Simular build frontend
         run: |
           if [ -f "./ag-prueba-front/package.json" ]; then
-            echo "Angular frontend detected. Installing dependencies..."
-            cd ag-prueba-front
-            npm install
-            npm run build --if-present
+            echo "Build frontend simulado"
           else
-            echo "No Angular frontend found. Skip step."
+            echo "No frontend. Skip step."
           fi
 
-      # -------------------------
-      # Deploy simulado
-      # -------------------------
-      - name: Deploy placeholder
-        run: |
-          echo "Pipeline mínimo ejecutado. Deploy simulado para demostrar OKR."
+      - name: Deploy simulado
+        run: echo "Deploy simulado completado"

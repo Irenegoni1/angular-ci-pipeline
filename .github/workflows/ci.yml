@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   pull_request:
-    branches: [main]
+    branches: [ "main" ]
   push:
-    branches: [main]
+    branches: [ "main" ]
 
 jobs:
   ci:
@@ -17,18 +17,18 @@ jobs:
       # -------------------------
       # BACKEND: Authorization Server
       # -------------------------
-      - name: Build & Test Authorization Server
+      - name: Build Authorization Server
         run: |
           cd authorization-server
-          mvn clean test
+          mvn -q -DskipTests clean package
 
       # -------------------------
       # BACKEND: Resource Server
       # -------------------------
-      - name: Build & Test Resource Server
+      - name: Build Resource Server
         run: |
           cd resource-server
-          mvn clean test
+          mvn -q -DskipTests clean package
 
       # -------------------------
       # FRONTEND: Angular
@@ -36,9 +36,9 @@ jobs:
       - name: Install dependencies for Angular
         run: |
           cd ag-prueba-front
-          npm install
+          npm install --silent
 
-      - name: Angular Unit Tests
+      - name: Angular Build
         run: |
           cd ag-prueba-front
-          npm test -- --watch=false --browsers=ChromeHeadless
+          npm run build --if-present

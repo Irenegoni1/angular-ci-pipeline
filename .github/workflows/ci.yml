@@ -39,9 +39,8 @@ jobs:
           node-version: 20
 
       - name: Install dependencies for Angular
-        run: |
-          cd ag-prueba-front
-          npm install
+        working-directory: ./ag-prueba-front
+        run: npm install
 
       - name: Angular Build
         run: |

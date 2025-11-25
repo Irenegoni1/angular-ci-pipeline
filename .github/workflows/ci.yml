@@ -1,0 +1,29 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Simular build backend
+        run: echo "Build backend simulado"
+
+      - name: Simular build frontend
+        run: |
+          if [ -f "./ag-prueba-front/package.json" ]; then
+            echo "Build frontend simulado"
+          else
+            echo "No frontend. Skip step."
+          fi
+
+      - name: Deploy simulado
+        run: echo "Deploy simulado completado"

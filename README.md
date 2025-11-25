@@ -1,3 +1,3 @@
 # POC
 
-Actualizado para pruebas de CI/CD.
+Actualizado para pruebas de CI/CD

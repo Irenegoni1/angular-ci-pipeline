@@ -9,22 +9,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Start Timer
         run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v3
-
-      - name: Build Backend
+      # -----------------------------------------
+      # BACKEND 1: Authorization Server
+      # -----------------------------------------
+      - name: Build Authorization Server
         run: |
           cd authorization-server
           mvn clean package -DskipTests
 
+      # -----------------------------------------
+      # BACKEND 2: Resource Server
+      # -----------------------------------------
       - name: Build Resource Server
         run: |
           cd resource-server
           mvn clean package -DskipTests
 
-      - name: Build Frontend
+      # -----------------------------------------
+      # FRONTEND Angular
+      # -----------------------------------------
+      - name: Build Angular Frontend
         run: |
           cd ag-prueba-front
           npm install
@@ -34,4 +43,4 @@ jobs:
         run: echo "END_TIME=$(date +%s)" >> $GITHUB_ENV
 
       - name: Deployment Duration
-        run: echo "DEPLOY_TIME=$((END_TIME-START_TIME)) seconds" >> $GITHUB_STEP_SUMMARY
+        run: echo "Tiempo de despliegue: $((END_TIME-START_TIME)) segundos" >> $GITHUB_STEP_SUMMARY

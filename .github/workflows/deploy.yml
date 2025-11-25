@@ -30,9 +30,11 @@ jobs:
       # -----------------------------------------
       # FRONTEND Angular (simulado)
       # -----------------------------------------
-      - name: Build Angular Frontend
+      - name: Build Angular Frontend (simulado)
         run: |
           if [ -f "./ag-prueba-front/package.json" ]; then
             echo "Build Angular simulado"
           else
-            echo "No frontend. Skip
+            echo "No frontend. Skip step"
+          fi
+

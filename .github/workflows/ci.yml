@@ -39,18 +39,6 @@ jobs:
         with:
           node-version: 20
 
-      - name: Check Angular folder
-        run: |
-          echo "Current folder:"
-          pwd
-          echo "List contents:"
-          ls -la
-          if [ ! -d "ag-prueba-front" ]; then
-            echo "ERROR: ag-prueba-front folder does not exist!"
-            exit 1
-          fi
-          ls -la ag-prueba-front
-
       - name: Install Angular dependencies
         working-directory: ./ag-prueba-front
         run: npm install
@@ -58,3 +46,10 @@ jobs:
       - name: Build Angular app
         working-directory: ./ag-prueba-front
         run: npm run build --if-present
+
+      # -------------------------
+      # Deploy (demostración OKR)
+      # -------------------------
+      - name: Deploy placeholder
+        run: |
+          echo "Despliegue simulado para medir tiempo y demostrar pipeline."

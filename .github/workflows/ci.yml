@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies for Angular
         run: |
           cd ag-prueba-front
-          npm ci --silent
+          npm install
 
       - name: Angular Build
         run: |

@@ -1,3 +1,3 @@
 # POC
 
-Realizacion de los dos primeros OKR
+Actualizado para pruebas de CI/CD.

@@ -32,24 +32,22 @@ jobs:
         run: mvn -q -DskipTests clean package
 
       # -------------------------
-      # Frontend: Angular
+      # Frontend: Saltarse Angular si no existe
       # -------------------------
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install Angular dependencies
-        working-directory: ./ag-prueba-front
-        run: npm install
-
-      - name: Build Angular app
-        working-directory: ./ag-prueba-front
-        run: npm run build --if-present
+      - name: Build Angular (si existe)
+        run: |
+          if [ -f "./ag-prueba-front/package.json" ]; then
+            echo "Angular frontend detected. Installing dependencies..."
+            cd ag-prueba-front
+            npm install
+            npm run build --if-present
+          else
+            echo "No Angular frontend found. Skip step."
+          fi
 
       # -------------------------
-      # Deploy (demostración OKR)
+      # Deploy simulado
       # -------------------------
       - name: Deploy placeholder
         run: |
-          echo "Despliegue simulado para medir tiempo y demostrar pipeline."
+          echo "Pipeline mínimo ejecutado. Deploy simulado para demostrar OKR."

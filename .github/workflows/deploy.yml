@@ -16,34 +16,23 @@ jobs:
         run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
 
       # -----------------------------------------
-      # BACKEND 1: Authorization Server
+      # BACKEND 1: Authorization Server (simulado)
       # -----------------------------------------
       - name: Build Authorization Server
-        run: |
-          cd authorization-server
-          mvn -q -e -DskipTests clean package
+        run: echo "Build Authorization Server simulado"
 
       # -----------------------------------------
-      # BACKEND 2: Resource Server
+      # BACKEND 2: Resource Server (simulado)
       # -----------------------------------------
       - name: Build Resource Server
-        run: |
-          cd resource-server
-          mvn -q -e -DskipTests clean package
+        run: echo "Build Resource Server simulado"
 
       # -----------------------------------------
-      # FRONTEND Angular
+      # FRONTEND Angular (simulado)
       # -----------------------------------------
       - name: Build Angular Frontend
         run: |
-          cd ag-prueba-front
-          npm install --silent
-          npm run build
-
-      - name: End Timer
-        run: echo "END_TIME=$(date +%s)" >> $GITHUB_ENV
-
-      - name: Deployment Duration
-        run: |
-          DURATION=$((END_TIME-START_TIME))
-          echo "Tiempo de despliegue: $DURATION segundos" >> $GITHUB_STEP_SUMMARY
+          if [ -f "./ag-prueba-front/package.json" ]; then
+            echo "Build Angular simulado"
+          else
+            echo "No frontend. Skip

@@ -11,38 +11,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # -------------------------
+      # Checkout repository
+      # -------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
 
       # -------------------------
-      # BACKEND: Authorization Server
+      # Backend: Authorization Server
       # -------------------------
       - name: Build Authorization Server
-        run: |
-          cd authorization-server
-          mvn -q -DskipTests clean package
+        working-directory: ./authorization-server
+        run: mvn -q -DskipTests clean package
 
       # -------------------------
-      # BACKEND: Resource Server
+      # Backend: Resource Server
       # -------------------------
       - name: Build Resource Server
-        run: |
-          cd resource-server
-          mvn -q -DskipTests clean package
+        working-directory: ./resource-server
+        run: mvn -q -DskipTests clean package
 
       # -------------------------
-      # FRONTEND: Angular
+      # Frontend: Angular
       # -------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Install dependencies for Angular
+      - name: Check Angular folder
+        run: |
+          echo "Current folder:"
+          pwd
+          echo "List contents:"
+          ls -la
+          if [ ! -d "ag-prueba-front" ]; then
+            echo "ERROR: ag-prueba-front folder does not exist!"
+            exit 1
+          fi
+          ls -la ag-prueba-front
+
+      - name: Install Angular dependencies
         working-directory: ./ag-prueba-front
         run: npm install
 
-      - name: Angular Build
+      - name: Build Angular app
         working-directory: ./ag-prueba-front
         run: npm run build --if-present
-

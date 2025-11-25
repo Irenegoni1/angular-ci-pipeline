@@ -2,14 +2,15 @@ name: Deploy Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Start Timer
         run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
@@ -20,7 +21,7 @@ jobs:
       - name: Build Authorization Server
         run: |
           cd authorization-server
-          mvn clean package -DskipTests
+          mvn -q -e -DskipTests clean package
 
       # -----------------------------------------
       # BACKEND 2: Resource Server
@@ -28,7 +29,7 @@ jobs:
       - name: Build Resource Server
         run: |
           cd resource-server
-          mvn clean package -DskipTests
+          mvn -q -e -DskipTests clean package
 
       # -----------------------------------------
       # FRONTEND Angular
@@ -36,11 +37,13 @@ jobs:
       - name: Build Angular Frontend
         run: |
           cd ag-prueba-front
-          npm install
+          npm install --silent
           npm run build
 
       - name: End Timer
         run: echo "END_TIME=$(date +%s)" >> $GITHUB_ENV
 
       - name: Deployment Duration
-        run: echo "Tiempo de despliegue: $((END_TIME-START_TIME)) segundos" >> $GITHUB_STEP_SUMMARY
+        run: |
+          DURATION=$((END_TIME-START_TIME))
+          echo "Tiempo de despliegue: $DURATION segundos" >> $GITHUB_STEP_SUMMARY

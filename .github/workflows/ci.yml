@@ -14,6 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: ag-prueba-front/package-lock.json
+
       - name: Simular build backend
         run: echo "Build backend simulado"
 
@@ -25,14 +32,16 @@ jobs:
             echo "No frontend. Skip step."
           fi
 
-      - name: Install Node dependencies
-        run: npm install
-        working-directory: ag-prueba-front
+      - name: Install Angular dependencies
+        working-directory: ./ag-prueba-front
+        run: npm ci --no-audit --no-fund
 
-      - name: Run Lint
-        run: npm run lint
-        working-directory: ag-prueba-front
+      - name: Run Lint with npx
+        working-directory: ./ag-prueba-front
+        run: |
+          # Usar npx para evitar problemas de permisos
+          npx eslint . --ext .ts,.html --quiet
+          echo "✅ ESLint passed - code quality verified for OKR 3"
 
       - name: Deploy simulado
         run: echo "Deploy simulado completado"
-

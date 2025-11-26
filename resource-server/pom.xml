@@ -77,21 +77,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- 🔍 Checkstyle -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.3.1</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- 🐞 SpotBugs -->
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>

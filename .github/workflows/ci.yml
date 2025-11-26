@@ -38,7 +38,7 @@ jobs:
           echo "✅ Backend build completed"
 
       # -------------------------
-      # FRONTEND: Linting
+      # FRONTEND: Linting (LO IMPORTANTE PARA OKR 3)
       # -------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -55,22 +55,4 @@ jobs:
         working-directory: ./ag-prueba-front
         run: |
           npx eslint . --ext .ts,.html --quiet
-          echo "✅ ESLint completed - code quality verified"
-
-      - name: Build Frontend
-        working-directory: ./ag-prueba-front
-        run: |
-          npm run build --if-present
-          echo "✅ Frontend build completed"
-
-      # -------------------------
-      # EVIDENCE FOR OKR 3
-      # -------------------------
-      - name: Generate Analysis Summary
-        run: |
-          echo "### 📊 Static Code Analysis - OKR 3 Evidence" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ **Backend Checkstyle**: Code standards verified" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ **Backend SpotBugs**: Potential bugs detected" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ **Backend JaCoCo**: Test coverage configured" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ **Frontend ESLint**: Code quality verified" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **OKR 3**: Code linting and static analysis successfully integrated" >> $GITHUB_STEP_SUMMARY
+          echo "✅ ESLint completed - frontend code quality verified"

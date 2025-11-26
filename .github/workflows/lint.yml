@@ -1,0 +1,25 @@
+name: Lint & Analysis
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  lint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and run Checkstyle
+        run: |
+          cd authorization-server && mvn validate
+          cd ../resource-server && mvn validate
+
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run ESLint
+        run: |
+          cd ag-prueba-front
+          npm install
+          npx eslint .

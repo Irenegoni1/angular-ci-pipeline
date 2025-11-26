@@ -25,5 +25,14 @@ jobs:
             echo "No frontend. Skip step."
           fi
 
+      - name: Install Node dependencies
+        run: npm install
+        working-directory: ag-prueba-front
+
+      - name: Run Lint
+        run: npm run lint
+        working-directory: ag-prueba-front
+
       - name: Deploy simulado
         run: echo "Deploy simulado completado"
+

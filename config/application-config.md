@@ -2,11 +2,6 @@
 
 Este archivo define la fuente única de verdad para las variables de configuración del sistema.
 
-## Google OAuth (valores dummy)
-
-GOOGLE_CLIENT_ID=dummy-client-id
-GOOGLE_CLIENT_SECRET=dummy-client-secret
-
 ## Base de datos
 
 DB_HOST=localhost

@@ -1,0 +1,24 @@
+name: SBOM Monitor
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Syft
+        uses: anchore/sbom-action/download-syft@v0.16.0
+
+      - name: Generate SBOM
+        run: syft . -o json > sbom.json
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sbom
+          path: sbom.json

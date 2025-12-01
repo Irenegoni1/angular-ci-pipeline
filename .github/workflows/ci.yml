@@ -40,6 +40,17 @@ jobs:
         working-directory: ./resource-server
         run: mvn -q compile -DskipTests
 
+      - name: Build backend
+        run: mvn -DskipTests package
+        working-directory: authorization-server
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v5
+        with:
+          name: authorization-server-jar
+          path: authorization-server/target/*.jar
+
+
   frontend-lint:
     name: Frontend - ESLint
     runs-on: ubuntu-latest

@@ -45,7 +45,7 @@ jobs:
         working-directory: authorization-server
 
       - name: Upload binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         with:
           name: authorization-server-jar
           path: authorization-server/target/*.jar

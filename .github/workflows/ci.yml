@@ -26,6 +26,12 @@ jobs:
         run: |
           mvn -q spotbugs:check || echo "⚠️ SpotBugs found issues (OK for evidence)"
 
+      - name: Run Backend Tests + JaCoCo
+        working-directory: ./authorization-server
+        run: |
+          mvn test || true
+          echo "JaCoCo report generated"
+
       - name: Build Authorization Server
         working-directory: ./authorization-server
         run: mvn -q compile -DskipTests

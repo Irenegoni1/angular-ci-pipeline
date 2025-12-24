@@ -17,3 +17,7 @@ ISSUER_URI=http://localhost:8080
 ## Angular
 
 ANGULAR_ENV=development
+
+# Activar todos los endpoints necesarios
+
+management.endpoints.web.exposure.include=health,info,metrics

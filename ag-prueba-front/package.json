@@ -9,12 +9,12 @@
     "lint": "eslint . --ext .ts,.html"
   },
   "devDependencies": {
-    "@angular-eslint/eslint-plugin": "^21.0.1",
-    "@angular-eslint/eslint-plugin-template": "^21.0.1",
-    "@angular-eslint/template-parser": "^21.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.48.0",
-    "@typescript-eslint/parser": "^8.48.0",
-    "eslint": "^9.39.1",
+    "@angular-eslint/eslint-plugin": "^21.4.0",
+    "@angular-eslint/eslint-plugin-template": "^21.4.0",
+    "@angular-eslint/template-parser": "^21.4.0",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^10.6.0",
     "eslint-config-angular": "^0.5.0"
   }
 }

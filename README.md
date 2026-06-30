@@ -1,30 +1,33 @@
-# POC: Arquitectura de Autorización y Recursos (Frontend + Backend)
+# Angular CI/CD Pipeline & Code Quality
 
-## 📌 Objetivo de la Prueba de Concepto
-Esta Prueba de Concepto (POC) tiene como objetivo demostrar la implementación y viabilidad de una arquitectura desacoplada utilizando un sistema de autenticación centralizado. El proyecto divide las responsabilidades entre un cliente frontend, un servidor de recursos protegido y un servidor de autorización independiente.
+## 📌 Objetivo del Proyecto
+Este repositorio sirve como demostración de la configuración de un entorno de desarrollo profesional para una aplicación frontend. El objetivo principal es mostrar la automatización de la calidad del código, la integración continua y la seguridad del proyecto utilizando flujos de trabajo (workflows) avanzados de GitHub Actions.
 
 ## 🏗️ Estructura del Proyecto
-El repositorio está dividido en los siguientes módulos principales:
+El proyecto está dividido en los siguientes módulos principales:
 
-* **`/ag-prueba-front`:** Aplicación cliente (Frontend) desarrollada en [Añadir Framework, ej: React / Angular]. Actúa como el cliente que solicita acceso a los recursos protegidos.
-* **`/authorization-server`:** Servidor de autorización en [Añadir tecnología, ej: Spring Boot / Node.js]. Encargado de gestionar las identidades, autenticar usuarios y emitir los tokens de acceso.
-* **`/resource-server`:** Servidor de recursos (Backend API) en [Añadir tecnología]. Contiene la lógica de negocio y expone endpoints protegidos que requieren un token válido para ser consumidos.
-* **`/config`:** Archivos de configuración centralizados.
-* **`/.github/workflows`:** Pipelines de integración continua (CI) configurados mediante GitHub Actions.
+* **`/ag-prueba-front`:** Código fuente de la aplicación cliente (Frontend). Contiene la configuración de dependencias, scripts de cliente y las reglas estrictas de validación de código mediante ESLint.
+* **`/.github/workflows`:** Pipelines de automatización configurados mediante GitHub Actions. Incluye:
+  * `ci.yml`: Integración Continua (validación de código y pruebas).
+  * `deploy.yml`: Flujo de despliegue automatizado.
+  * `post-deploy-scan.yml`: Escaneo de vulnerabilidades y seguridad tras el despliegue.
+  * `sbom.yml`: Generación del *Software Bill of Materials* (inventario de componentes de software para control de seguridad).
 
 ## 🚀 Tecnologías Utilizadas
-* **Frontend:** [Framework Frontend, ej: React, Vite, Node.js]
-* **Backend:** [Framework Backend, ej: Java 17, Spring Boot, Spring Security]
-* **Seguridad:** [Estándar usado, ej: OAuth2, JWT]
-* **Infraestructura:** Docker & Docker Compose
-* **CI/CD:** GitHub Actions
+* **Frontend:** Angular, TypeScript
+* **Calidad de Código:** ESLint, TypeScript-ESLint
+* **CI/CD & DevOps:** GitHub Actions
 
 ## ⚙️ Cómo ejecutar el proyecto (Local)
 
-El proyecto está dividido en dos partes para su ejecución: el entorno backend (orquestado con Docker) y el cliente frontend.
+Para levantar la aplicación frontend en tu entorno local, sigue estos pasos:
 
-### 1. Levantar los servidores Backend (Docker)
-Asegúrate de tener [Docker](https://www.docker.com/) instalado. En la raíz del proyecto, ejecuta:
-
-```bash
-docker-compose up -d --build
+1. Accede al directorio principal del frontend:
+   ```bash
+   cd ag-prueba-front
+2. Instala las dependencias necesarias:
+    ```bash
+    npm install
+3. Levanta el servidor de desarrollo:
+    ```bash
+    npm start
